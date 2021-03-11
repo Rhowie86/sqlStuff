@@ -120,5 +120,36 @@ select count (p.Id)
 	JOIN Emotion emo on pemo.Id = emo.Id
 	where emo.Name = NULL
 	
+--18. Which emotion is associated with the least number of poems?
+
+select count (emo.Id), emo.name
+from Emotion emo
+join PoemEmotion pemo on emo.id = pemo.EmotionId
+join Poem p on pemo.PoemId = p.id
+group by emo.name
+	
+
+--19. Which grade has the largest number of poems with an emotion of joy?
+
+select count (p.Id) as numOfPoems, g.name
+	from Poem p
+	join Grade g on p.Id = p.AuthorId
+	Join Author a on g.Id = a.GradeId
+	join PoemEmotion pemo on pemo.PoemId = p.Id
+	join Emotion emo on pemo.EmotionId = emo.Id
+	where emo.Id = 4
+	group by g.Name
+
+--20. Which gender has the least number of poems with an emotion of fear?
+
+select count (gen.Id), gen.Name
+from Gender gen
+join Author a on a.GenderId = gen.Id
+join Poem p on a.Id = p.AuthorId
+join PoemEmotion pemo on p.Id = pemo.PoemId
+join Emotion emo on pemo.EmotionId = emo.Id
+where emo.Id = 2
+group by gen.Name
+	
 	
 
