@@ -37,7 +37,7 @@ LEFT JOIN Gender gen ON a.GenderId = gen.Id
 
 --7. What is the total number of words in all poems in the database?
 
-select count (p.WordCount) as TotalWords
+select sum (p.WordCount) as TotalWords
 	from Poem p;
 
 -- 8. Which poem has the fewest characters?
